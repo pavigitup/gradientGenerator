@@ -31,10 +31,10 @@ export const ListContainer = styled.ul`
   justify-content: space-between;
 `
 
-export const ColorPicker = styled.form`
+export const ColorPicker = styled.div`
   display: flex;
-  justify-content: space-around;
-  width: 20%;
+  justify-content: space-between;
+  width: 300px;
   margin-top: 3%;
 `
 
@@ -45,4 +45,31 @@ export const InputCon = styled.div`
   flex-direction: column;
   align-items: center;
   color: #ffffff;
+`
+
+export const Para = styled.p`
+  color: #ffffff;
+`
+
+export const BtnContainer = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80px;
+`
+export const Button = styled.button`
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  font-weight: 600;
+  background-color: #00c9b7;
+`
+export const Input = styled.input`
+  width: 150px; /* Adjust width as needed */
+  height: 100px; /* Adjust height as needed */
+  padding: 0; /* Remove padding */
+  border: none; /* Remove border */
+  background-color: transparent; /* Round the corners to make it look like a circle */
+  cursor: pointer;
 `

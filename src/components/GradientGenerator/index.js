@@ -1,5 +1,3 @@
-// GradientGenerator.js
-
 import {Component} from 'react'
 import {
   Container,
@@ -8,6 +6,10 @@ import {
   ListContainer,
   ColorPicker,
   InputCon,
+  Para,
+  BtnContainer,
+  Button,
+  Input,
 } from './styledComponents'
 import GradientDirectionItem from '../GradientDirectionItem'
 
@@ -23,9 +25,11 @@ class GradientGenerator extends Component {
     firstColor: '#8ae323',
     secondColor: '#014f7b',
     direction: 'top',
-    firstColors: '#8ae323',
-    secondColors: '#014f7b',
-    directions: '',
+    activeDirection: 'Top',
+  }
+
+  setActiveDirection = direction => {
+    this.setState({activeDirection: direction})
   }
 
   FirstColor = event => {
@@ -44,26 +48,20 @@ class GradientGenerator extends Component {
     event.preventDefault()
     const {firstColor, secondColor, direction} = this.state
     this.setState({
-      firstColors: firstColor,
-      secondColors: secondColor,
-      directions: direction,
+      firstColor,
+      secondColor,
+      direction,
     })
   }
 
   render() {
-    const {
-      firstColor,
-      secondColor,
-      firstColors,
-      secondColors,
-      directions,
-    } = this.state
+    const {firstColor, secondColor, direction, activeDirection} = this.state
     return (
       <Container
         data-testid="gradientGenerator"
-        bgDirection={directions}
-        firstColor={firstColors}
-        secondColor={secondColors}
+        bgDirection={direction}
+        firstColor={firstColor}
+        secondColor={secondColor}
       >
         <Header>Generate a CSS Color Gradient</Header>
         <Paragraph>Choose Direction</Paragraph>
@@ -73,31 +71,37 @@ class GradientGenerator extends Component {
               key={list.directionId}
               directionsList={list}
               directionName={this.directionName}
+              setActiveDirection={this.setActiveDirection}
+              activeDirection={activeDirection}
             />
           ))}
         </ListContainer>
-        <p>Pick the Colors</p>
-        <ColorPicker onSubmit={this.submitForm}>
-          <InputCon>
-            <p htmlFor="color1">{firstColor}</p>
-            <input
-              type="color"
-              id="color1"
-              value={firstColor}
-              onChange={this.FirstColor}
-            />
-          </InputCon>
-          <InputCon>
-            <p htmlFor="color2">{secondColor}</p>
-            <input
-              type="color"
-              id="color2"
-              value={secondColor}
-              onChange={this.SecondColor}
-            />
-          </InputCon>
-          <button type="submit">Generate</button>
-        </ColorPicker>
+        <Para>Pick the Colors</Para>
+        <form onSubmit={this.submitForm}>
+          <ColorPicker>
+            <InputCon>
+              <p htmlFor="color1">{firstColor}</p>
+              <Input
+                type="color"
+                id="color1"
+                value={firstColor}
+                onChange={this.FirstColor}
+              />
+            </InputCon>
+            <InputCon>
+              <p htmlFor="color2">{secondColor}</p>
+              <Input
+                type="color"
+                id="color2"
+                value={secondColor}
+                onChange={this.SecondColor}
+              />
+            </InputCon>
+          </ColorPicker>
+          <BtnContainer>
+            <Button type="submit">Generate</Button>
+          </BtnContainer>
+        </form>
       </Container>
     )
   }
